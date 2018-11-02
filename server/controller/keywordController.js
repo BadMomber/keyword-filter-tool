@@ -1,23 +1,25 @@
 /** Package imports */
 const express = require ('express');
 const router = express.Router ({mergeParams: true});
-var fileUpload = require('express-fileupload');
+let path = require('path');
+
 
 /** File imports */
 const asyncWrapper = require ('./middleware/asyncWrapper');
 const Keyword = require ('../models/keyword');
 const escape = require ('./middleware/escapeHTML');
-var template = require('./controller/middleware/template.js');
+let upload = require('./upload');
 
 
 /** Routes */
-router.get('/', function (req, res) {res.sendFile(__dirname + '/index.html')});
+router.get('/', function (req, res) {res.sendFile(path.resolve(__dirname + '../../../client/index.html'))});
 router.get ('/template', getKeywordTemplate);
+router.get ('/keywords', getKeywords);
 router.get ('/:id', getKeywordWithID);
 router.delete ('/:id', deleteKeyword);
 router.put ('/:id', updateKeyword);
 router.post ('/', asyncWrapper (addNewKeyword));
-router.post('/', upload.post);
+router.post('/upload', upload.post);
 
 
 

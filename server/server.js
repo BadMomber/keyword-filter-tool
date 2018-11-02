@@ -2,6 +2,7 @@
 const bodyParser = require ('body-parser');
 const express = require ('express');
 const mongoose = require ('mongoose');
+let fileUpload = require('express-fileupload');
 
 /** File import */
 const timeService = require ('./services/timeService');

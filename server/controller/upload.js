@@ -1,6 +1,6 @@
 let csv = require ('fast-csv');
 let mongoose = require ('mongoose');
-let Keyword = require ('./keyword');
+let Keyword = require ('../models/keyword');
 
 exports.post = function (req, res) {
   if (!req.files)

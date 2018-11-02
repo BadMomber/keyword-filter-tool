@@ -1,23 +1,23 @@
 /** Package imports */
 const mongoose = require ('mongoose');
-const mongoose_csv = require ('mongoose-csv');
 
 /** Initialize Schema */
 const Schema = mongoose.Schema;
 
 /** Setup Schema */
-const keywordSchema = new Schema ({
+const keywordSchema = Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   keyword: {
     type: String,
-    required: 'Keyword missing'
+    required: false
   },
   currency: {
     type: String,
-    required: 'Currency missing'
+    required: false
   },
   avg_monthly_searches: {
     type: Number,
-    required: 'Missing avarage monthly searches'
+    required: false
   },
   competition: {
     type: String,
@@ -31,64 +31,54 @@ const keywordSchema = new Schema ({
     type: Number,
     required: false
   },
-  monthly_searches_jan: {
+  monthly_searches_month_1: {
     type: Number,
     required: false
   },
-  monthly_searches_feb: {
+  monthly_searches_month_2: {
     type: Number,
     required: false
   },
-  monthly_searches_mar: {
+  monthly_searches_month_3: {
     type: Number,
     required: false
   },
-  monthly_searches_april: {
+  monthly_searches_month_4: {
     type: Number,
     required: false
   },
-  monthly_searches_may: {
+  monthly_searches_month_5: {
     type: Number,
     required: false
   },
-  monthly_searches_jun: {
+  monthly_searches_month_6: {
     type: Number,
     required: false
   },
-  monthly_searches_jul: {
+  monthly_searches_month_7: {
     type: Number,
     required: false
   },
-  monthly_searches_aug: {
+  monthly_searches_month_8: {
     type: Number,
     required: false
   },
-  monthly_searches_sep: {
+  monthly_searches_month_9: {
     type: Number,
     required: false
   },
-  monthly_searches_oct: {
+  monthly_searches_month_10: {
     type: Number,
     required: false
   },
-  monthly_searches_nov: {
+  monthly_searches_month_11: {
     type: Number,
     required: false
   },
-  monthly_searches_dec: {
+  monthly_searches_month_12: {
     type: Number,
     required: false
-  },
-  created_at: {
-    type: Date,
-    default: Date.now
-  },
-  updated_at: {
-    type: Date,
-    default: null
   },
 });
-
-keywordSchema.plugin (mongoose_csv);
 
 module.exports = mongoose.model ('Keyword', keywordSchema);
