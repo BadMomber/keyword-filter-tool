@@ -1,0 +1,24 @@
+{
+  "name": "keyword-tool",
+  "version": "1.0.0",
+  "description": "Organize and display Google Adwords keyword tool results by specific filters",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Kersten Kriegbaum",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.8",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4"
+  }
+}
