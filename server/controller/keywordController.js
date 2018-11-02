@@ -1,19 +1,38 @@
 /** Package imports */
 const express = require ('express');
 const router = express.Router ({mergeParams: true});
+var fileUpload = require('express-fileupload');
 
 /** File imports */
 const asyncWrapper = require ('./middleware/asyncWrapper');
 const Keyword = require ('../models/keyword');
 const escape = require ('./middleware/escapeHTML');
+var template = require('./controller/middleware/template.js');
+
 
 /** Routes */
-router.get ('/', getKeywords);
-router.get ('/csv', getAllKeywordsAsCSV);
+router.get('/', function (req, res) {res.sendFile(__dirname + '/index.html')});
+router.get ('/template', getKeywordTemplate);
 router.get ('/:id', getKeywordWithID);
 router.delete ('/:id', deleteKeyword);
 router.put ('/:id', updateKeyword);
 router.post ('/', asyncWrapper (addNewKeyword));
+router.post('/', upload.post);
+
+
+
+async function getKeywordTemplate(req, res) {
+  try {
+    res.writeHead (200, {
+      'Content-Type': 'text/csv',
+      'Content-Disposition': 'attachment; filename=keywords.csv'
+    });
+    // pipe file using mongoose-csv
+    Keyword.find ().csv (res);
+  } catch (e) {
+    res.status (500).send (e);
+  }
+}
 
 /**
  * Add a new keyword

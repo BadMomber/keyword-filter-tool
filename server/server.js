@@ -25,6 +25,7 @@ mongoose.connect (
 const app = express ();
 
 /** Middleware */
+app.use(fileUpload());
 app.use (bodyParser.urlencoded ({extended: true}));
 app.use (bodyParser.json ());
 app.use (bodyParser.text ());
