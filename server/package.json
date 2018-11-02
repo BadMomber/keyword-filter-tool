@@ -4,14 +4,19 @@
   "description": "Organize and display Google Adwords keyword tool results by specific filters",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "NODE_ENV=test MONGODB_NAME=keywordtool_test mocha --exit",
+    "live": "NODE_ENV=live MONGODB_NAME=keywordtool_live node server.js",
+    "dev": "NODE_ENV=dev MONGODB_NAME=keywordtool nodemon server.js"
   },
   "author": "Kersten Kriegbaum",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-fileupload": "^1.0.0",
+    "json2csv": "^4.2.1",
     "mongoose": "^5.3.8",
+    "mongoose-csv": "^1.1.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
