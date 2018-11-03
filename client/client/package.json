@@ -1,0 +1,28 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "client for the keyword-tool",
+  "author": "BadMomber",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "@uppy/core": "^0.28.0",
+    "@uppy/xhr-upload": "^0.28.0",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.0.0",
+    "vuetify": "^1.2.4"
+  },
+  "devDependencies": {
+    "css-loader": "^1.0.1",
+    "nodemon": "^1.11.0",
+    "style-loader": "^0.23.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
+  }
+}

@@ -10,11 +10,10 @@ const Keyword = require ('../models/keyword');
 const escape = require ('./middleware/escapeHTML');
 let upload = require('./upload');
 
-
 /** Routes */
-router.get('/', function (req, res) {res.sendFile(path.resolve(__dirname + '../../../client/index.html'))});
+router.get('/start', function (req, res) {res.sendFile(path.resolve(__dirname + '../../../client/index.html'))});
 router.get ('/template', getKeywordTemplate);
-router.get ('/keywords', getKeywords);
+router.get ('/', getKeywords);
 router.get ('/:id', getKeywordWithID);
 router.delete ('/:id', deleteKeyword);
 router.put ('/:id', updateKeyword);
