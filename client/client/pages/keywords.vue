@@ -1,34 +1,16 @@
 <template slot="icon-right">
   <v-layout>
+
     <v-flex text-xs-center>
-      <img
-        src="/v.png"
-        alt="Vuetify.js"
-        class="mb-5">
-      <blockquote class="blockquote">
-        &#8220;First, solve the problem. Then, write the code.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;John Johnson</em>
-          </small>
-        </footer>
-      </blockquote>
-      <v-btn
-        :loading="loading3"
-        :disabled="loading3"
-        color="blue-grey"
-        class="white--text"
-        @click.native="loader = 'loading3'"
-      >
-        Upload
-        <v-icon right dark>cloud_upload</v-icon>
-      </v-btn>
-
-      <label class="button" @click="$refs.fileInput.value = ''">
-        <input type="file" multiple style="display:none" ref="fileInput" @input="uploadFiles">
-      </label>
-
+      <div class="UppyForm">
+        <form action="/api/keywords/upload/" method="POST" encType="multipart/form-data">
+          <h5>Uppy was not loaded — slow connection, unsupported browser, weird JS error on a page — but the upload still works, because HTML is cool like that</h5>
+          <input type="file" name="file" accept="*.csv" >
+          <button type="submit">Fallback Form Upload</button>
+        </form>
+      </div>
     </v-flex>
+
     <v-flex text-xs-center>
       <v-flex xs12>
 
@@ -98,8 +80,76 @@
 </template>
 
 <script>
+  const Uppy = require('@uppy/core');
+  const FileInput = require('@uppy/file-input');
+  const XHRUpload = require('@uppy/xhr-upload');
+
+  /* Beispiel von Uppy Website
+  const uppy = new Uppy({ debug: true, autoProceed: true });
+  uppy.use(FileInput, { target: '.UppyForm', replaceTargetContent: true })
+  uppy.use(XHRUpload, {
+    endpoint: 'localhost:4000/api/keywords/',
+    formData: true,
+    fieldName: 'files[]'
+  });
+  */
+
   export default {
-    name: "keywords"
+    name: "keywords",
+    props: {
+      modelClass: {
+        type: String,
+        required: true
+      },
+      modelId: {
+        type: String,
+        required: true
+      },
+      collection: {
+        type: String,
+        required: true
+      },
+      endpoint: {
+        type: String,
+        required: false,
+        default() {
+          return '/api/keywords/upload/'
+        }
+      }
+    },
+    data() {
+      return {}
+    },
+
+    computed: {
+      uppyId() {
+        return this.modelClass + '-' + this.modelId + '-' + this.collection;
+      }
+    },
+    mounted() {
+      const uppy = new Uppy({
+        id: this.uppyId,
+        debug: true,
+        autoProceed: true,
+        restrictions: {
+          maxFileSize: false,
+          allowedFileTypes: ['.csv']
+        },
+        meta: {
+          modelClass: this.modelClass,
+          modelId: this.modelId,
+          collection: this.collection
+        },
+      });
+      uppy.use(XHRUpload, {
+        endpoint: this.endpoint,
+        headers: {
+          'X-CSRF-TOKEN': window.csrfToken
+        },
+        fieldName: 'files[]'
+      })
+      uppy.run();
+    }
   }
 </script>
 

@@ -3,6 +3,7 @@ const bodyParser = require ('body-parser');
 const express = require ('express');
 const mongoose = require ('mongoose');
 let fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 /** File import */
 const timeService = require ('./services/timeService');
@@ -26,6 +27,7 @@ mongoose.connect (
 const app = express ();
 
 /** Middleware */
+app.use(cors());
 app.use(fileUpload());
 app.use (bodyParser.urlencoded ({extended: true}));
 app.use (bodyParser.json ());

@@ -93,9 +93,7 @@
         drawer: true,
         fixed: false,
         items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
-          { icon: 'vpn_key', title: 'Keyword-Tool', to: '/keywords'}
+          { icon: 'vpn_key', title: 'Keyword-Tool', to: '/'}
         ],
         miniVariant: false,
         right: true,
