@@ -16,9 +16,11 @@
     "@uppy/dashboard": "^0.28.0",
     "@uppy/file-input": "^0.28.0",
     "@uppy/xhr-upload": "^0.28.0",
+    "chart.js": "^2.7.3",
     "cors": "^2.8.4",
     "cross-env": "^5.2.0",
     "nuxt": "^2.0.0",
+    "taucharts": "^2.6.3",
     "vuetify": "^1.2.4"
   },
   "devDependencies": {

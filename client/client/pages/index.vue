@@ -1,152 +1,139 @@
 <template slot="icon-right">
 
+  <div>
+    <v-layout>
+      <v-container>
+        <v-flex>
 
-  <v-layout>
-    <div class="container">
-      <div class="large-12 medium-12 small-12 cell">
-        <label>File
-          <input
-            type="file"
-            id="file"
-            ref="file"
-            v-on:change="handleFileUpload()"
+          <fileUpload></fileUpload>
+
+          <chart class="chart"></chart>
+
+        </v-flex>
+      </v-container>
+    </v-layout>
+
+    <v-layout>
+
+      <v-flex text-xs-center>
+        <v-flex xs12>
+
+          <v-slider
+            v-model="slider"
+            thumb-label="always"
+            thumb-size="42"
+            color="accent"
+            step="100"
+            min="0"
+            max="100000">
+            >
+          </v-slider>
+
+          <v-header
+            class="pl-0"
+            color="white"
+          ><h4>Avg. monthly searches</h4></v-header>
+
+          <v-slider
+            v-model="competition"
+            color="secondary"
+            :tick-labels="ticksLabels"
+            :max="2"
+            step="1"
+            ticks="always"
+            tick-size="3"
           >
-        </label>
-        <button
-          v-on:click="submitFile()"
-        >Submit
-        </button>
-      </div>
-    </div>
-    <!--
-    <v-flex text-xs-center>
-      <div class="UppyForm">
-          <form action="/api/keywords/upload/" method="POST" encType="multipart/form-data">
-            <h5>Uppy was not loaded — slow connection, unsupported browser, weird JS error on a page — but the upload
-              still works, because HTML is cool like that</h5>
-            <input type="file" name="file" accept="*.csv">
-            <button type="submit">Fallback Form Upload</button>
-            <button id="open-thumbnail-modal" class="button">Select file</button>
-          </form>
-        </div>
-    </v-flex>
-    -->
+          </v-slider>
 
-    <!--
-    <v-flex text-xs-center>
-      <v-flex xs12>
+          <v-header
+            class="pl-0"
+            color="white"
+          ><h4>Competition</h4></v-header>
 
-        <v-header
-          class="pl-0"
-          color="white"
-        ><h4>Avg. monthly searches</h4></v-header>
+          <v-slider
+            v-model="slider"
+            thumb-label="always"
+            thumb-size="42"
+            color="info"
+            step="100"
+            min="0"
+            max="100000">
+            >
+          </v-slider>
 
-        <v-slider
-          v-model="slider"
-          thumb-label="always"
-          thumb-size="42"
-          color="accent"
-          step="100"
-          min="0"
-          max="100000">
-          >
-        </v-slider>
+          <v-header
+            class="pl-0"
+            color="white"
+          ><h4>Top of page bid - low</h4></v-header>
 
-        <v-header
-          class="pl-0"
-          color="white"
-        ><h4>Competition</h4></v-header>
+          <v-slider
+            v-model="slider"
+            thumb-label="always"
+            thumb-size="42"
+            color="good"
+            step="100"
+            min="0"
+            max="100000">
+            >
+          </v-slider>
 
-        <v-slider
-          v-model="slider"
-          thumb-label="always"
-          thumb-size="42"
-          color="secondary"
-          step="100"
-          min="0"
-          max="100000">
-          >
-        </v-slider>
+          <v-header
+            class="pl-0"
+            color="white"
+          ><h4>Top of page bid - high</h4></v-header>
 
-        <v-header
-          class="pl-0"
-          color="white"
-        ><h4>Top of page bid - low</h4></v-header>
-
-        <v-slider
-          v-model="slider"
-          thumb-label="always"
-          thumb-size="42"
-          color="info"
-          step="100"
-          min="0"
-          max="100000">
-          >
-        </v-slider>
-
-        <v-header
-          class="pl-0"
-          color="white"
-        ><h4>Top of page bid - high</h4></v-header>
-
-        <v-slider
-          v-model="slider"
-          thumb-label="always"
-          thumb-size="42"
-          color="good"
-          step="100"
-          min="0"
-          max="100000">
-          >
-        </v-slider>
-
+        </v-flex>
       </v-flex>
-    </v-flex>
-    -->
-  </v-layout>
+
+      <v-flex text-xs-center>
+        <v-text-field
+          label="Solo"
+          single-line
+          solo
+        ></v-text-field>
+
+        <v-text-field
+          label="Solo"
+          single-line
+          solo
+        ></v-text-field>
+
+        <v-text-field
+          label="Solo"
+          single-line
+          solo
+        ></v-text-field>
+
+        <v-text-field
+          label="Solo"
+          single-line
+          solo
+        ></v-text-field>
+      </v-flex>
+
+    </v-layout>
+  </div>
 </template>
 
 <script>
-  import axios from 'axios';
+  import fileUpload from '~/components/fileUpload.vue'
+  import chart from '~/components/chart.vue'
 
   export default {
-    data() {
-      return {
-        file: ''
-      }
+    components: {
+      chart,
+      fileUpload
     },
-    methods: {
-      handleFileUpload() {
-        this.file = this.$refs.file.files[0];
-      },
-      submitFile() {
-        /*
-                Initialize the form data
-            */
-        let formData = new FormData ();
-
-        /*
-            Add the form data we need to submit
-        */
-        formData.append ('file', this.file);
-
-        /*
-          Make the request to the POST /single-file URL
-        */
-        axios.post ('http://localhost:4000/api/keywords/upload',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        ).then (function () {
-          console.log ('SUCCESS!!');
-        })
-          .catch (function () {
-            console.log ('FAILURE!!');
-          });
-      },
+    data () {
+      return {
+        value: 0,
+        competition: 0,
+        ticksLabels: [
+          'Low',
+          'Medium',
+          'High'
+        ]
+      }
     }
   }
 </script>
@@ -163,6 +150,15 @@
 
   .v-icon {
     margin-left: .8rem;
+  }
+
+  .v-input--slider {
+    height: 1rem;
+    margin-top: 2.4rem;
+  }
+
+  h4 {
+    margin: 1rem 0 4rem 0;
   }
 
 </style>

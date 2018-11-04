@@ -1,5 +1,6 @@
 <template>
   <v-app dark>
+    <!--
     <v-navigation-drawer
       :mini-variant="miniVariant"
       :clipped="clipped"
@@ -24,6 +25,9 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+    -->
+
+    <!--
     <v-toolbar
       :clipped-left="clipped"
       fixed
@@ -56,6 +60,8 @@
         <v-icon>menu</v-icon>
       </v-btn>
     </v-toolbar>
+    -->
+
     <v-content>
       <v-container>
         <nuxt />
@@ -76,12 +82,16 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+
+    <!--
     <v-footer
       :fixed="fixed"
       app
     >
       <span>&copy; 2017</span>
     </v-footer>
+    -->
+
   </v-app>
 </template>
 
