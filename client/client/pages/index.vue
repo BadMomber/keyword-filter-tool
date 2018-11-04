@@ -77,6 +77,7 @@
             >
           </v-slider>
 
+
           <v-header
             class="pl-0"
             color="white"
